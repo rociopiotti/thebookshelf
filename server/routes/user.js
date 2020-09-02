@@ -41,6 +41,7 @@ router.post("/login", (req, res) => {
         if (err) return res.status(400).send(err);
         res.cookie("auth", user.token).json({
           auth: true,
+          message: "Login success",
         });
       });
     });
@@ -56,6 +57,13 @@ router.get("/auth", auth, (req, res) => {
       name: req.user.name,
       lastname: req.user.lastname,
     },
+  });
+});
+
+router.get("/logout", auth, (req, res) => {
+  req.user.deleteToken(req.token, (err, user) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ mesage: "Goodbye" });
   });
 });
 
