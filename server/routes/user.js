@@ -42,6 +42,12 @@ router.post("/login", (req, res) => {
         res.cookie("auth", user.token).json({
           auth: true,
           message: "Login success",
+          userData: {
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            lastname: user.lastname,
+          }
         });
       });
     });
