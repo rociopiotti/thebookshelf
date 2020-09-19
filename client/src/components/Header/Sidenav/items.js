@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Fontawesome from "react-fontawesome";
 import { RouteLinks } from "../../../utils/routeLinks";
 import { connect } from "react-redux";
+
 const Items = (props) => {
   const element = (item, i) => (
     <div key={i} className='navItem'>
