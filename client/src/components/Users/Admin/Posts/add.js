@@ -4,16 +4,32 @@ import { Link } from "react-router-dom";
 import AdminLayout from "../../../../HOC/adminLayout";
 import { FormElement, BookSchema } from "./utils/postsHelper";
 
-// // WYSIWYG
-// import { EditorState } from 'draft-js';
-// import { Editor } from 'react-draft-wysiwyg';
-// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+// DRATF JS
+import { EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
+import RichTextEditor from "./RichTextEditor";
+
+import { connect } from "react-redux";
+import { addBook } from "../../../../store/actions/book_actions";
 
 class AddPosts extends Component {
   state = {
-    editorState: "",
+    editorState: EditorState.createEmpty(),
     editorContentHtml: "",
     success: false,
+    submitted: false,
+  };
+
+  onEditorStateChange(value) {
+    this.setState({
+      editorContentHtml: value,
+
+      submitted: false,
+    });
+  }
+
+  onPostBook = (values) => {
+    this.props.dispatch(addBook(values));
   };
   render() {
     return (
@@ -28,8 +44,16 @@ class AddPosts extends Component {
             price: "",
           }}
           validationSchema={BookSchema}
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={(values, { resetForm }) => {
+            this.onPostBook({
+              ...values,
+              content: this.state.editorContentHtml,
+            });
+            resetForm({});
+            this.setState({
+              editorState: EditorState.createEmpty(),
+              submitted: true,
+            });
           }}>
           {({
             values,
@@ -48,6 +72,10 @@ class AddPosts extends Component {
                 onHandleBlur={(e) => handleBlur(e)}
                 errors={errors.name}
                 touched={touched.name}
+              />
+              <RichTextEditor
+                onEditorStateChange={this.onEditorStateChange.bind(this)}
+                reset={this.state.submitted}
               />
               <h4>Book info</h4>
               <FormElement
@@ -114,4 +142,10 @@ class AddPosts extends Component {
     );
   }
 }
-export default AddPosts;
+
+function mapStateToProps(state) {
+  return {
+    books: state.books,
+  };
+}
+export default connect(mapStateToProps)(AddPosts);
