@@ -6,7 +6,6 @@ import AdminLayout from "../../../../HOC/adminLayout";
 import { BookSchema, FormElement } from "./utils/postsHelper";
 
 // DRATF JS
-import { EditorState, ContentState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { connect } from "react-redux";
@@ -15,7 +14,6 @@ import {
   clearBook,
   getBook,
 } from "../../../../store/actions/book_actions";
-import htmlToDraft from "html-to-draftjs";
 
 class EditPost extends Component {
   state = {
@@ -41,7 +39,7 @@ class EditPost extends Component {
   componentDidUpdate(prevProps) {
     const hasChanged = this.props.books.single !== prevProps.books.single;
     const hasUpdated = this.props.books.update !== prevProps.books.update;
-    const single = this.props.books.single;
+    // const single = this.props.books.single;
 
     if (hasUpdated) {
       this.setState({ success: true });

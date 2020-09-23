@@ -22,20 +22,6 @@ class RichTextEditor extends Component {
       editorContentHtml: "",
     };
 
-    if (props.singleContent) {
-      const singleContent = props.singleContent.content;
-      const blockFromHtml = htmlToDraft(singleContent);
-      const { contentBlocks, entityMap } = blockFromHtml;
-      const contentState = ContentState.createFromBlockArray(
-        contentBlocks,
-        entityMap
-      );
-      this.state = {
-        editorState: EditorState.createWithContent(contentState),
-        editorContentHtml: "",
-      };
-    }
-
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => {
       const editorContentHtml = stateToHTML(editorState.getCurrentContent());
@@ -47,6 +33,24 @@ class RichTextEditor extends Component {
     this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
     this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+  }
+
+  componentDidMount() {
+    /// IN EDIT ROUTE LOAD BOOKID CONTENT IN TEXTEDITOR
+    if (this.props.singleContent) {
+      const singleContent = this.props.singleContent.content;
+      const blockFromHtml = htmlToDraft(singleContent);
+      const { contentBlocks, entityMap } = blockFromHtml;
+      const contentState = ContentState.createFromBlockArray(
+        contentBlocks,
+        entityMap
+      );
+
+      this.setState({
+        editorState: EditorState.createWithContent(contentState),
+        editorContentHtml: "",
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -94,7 +98,6 @@ class RichTextEditor extends Component {
 
   render() {
     const { editorState } = this.state;
-
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
     let className = "RichEditor-editor";
