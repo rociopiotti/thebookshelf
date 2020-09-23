@@ -1,5 +1,11 @@
 import axios from "axios";
-import { BOOK_ADD, BOOK_CLEAR, BOOK_GET, BOOK_UPDATE } from "../types";
+import {
+  BOOK_ADD,
+  BOOK_CLEAR,
+  BOOK_GET,
+  BOOK_UPDATE,
+  BOOKS_GET,
+} from "../types";
 
 /*================ BOOKS =============*/
 export function addBook(book) {
@@ -47,6 +53,18 @@ export function editBook(book) {
 
   return {
     type: BOOK_UPDATE,
+    payload: request,
+  };
+}
+
+export function getBooks(limit = 50, start = 0, order = "asc", list) {
+  const request = axios
+    .get(`/api/books/allbooks?limit=${limit}&skip=${start}&order=${order}`)
+    .then((response) => {
+      return list ? [...list, ...response.data] : response.data
+    });
+  return {
+    type: BOOKS_GET,
     payload: request,
   };
 }

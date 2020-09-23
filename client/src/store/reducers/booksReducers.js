@@ -1,4 +1,10 @@
-import { BOOK_ADD, BOOK_CLEAR, BOOK_GET, BOOK_UPDATE } from "../types";
+import {
+  BOOK_ADD,
+  BOOK_CLEAR,
+  BOOK_GET,
+  BOOK_UPDATE,
+  BOOKS_GET,
+} from "../types";
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -15,6 +21,8 @@ export default function (state = {}, action) {
       return { ...state, single: action.payload };
     case BOOK_UPDATE:
       return { ...state, update: action.payload };
+    case BOOKS_GET:
+      return { ...state, collection: action.payload };
     default:
       return state;
   }
