@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import {
   addBook,
   clearBook,
+  editBook,
   getBook,
 } from "../../../../store/actions/book_actions";
 
@@ -33,14 +34,13 @@ class EditPost extends Component {
   };
 
   onEditBook = (values) => {
-    // this.props.dispatch(addBook(values));
+    this.props.dispatch(editBook(values));
   };
 
   componentDidUpdate(prevProps) {
     const hasChanged = this.props.books.single !== prevProps.books.single;
     const hasUpdated = this.props.books.update !== prevProps.books.update;
-    // const single = this.props.books.single;
-
+    const single = this.props.books.single;
     if (hasUpdated) {
       this.setState({ success: true });
     }
@@ -48,12 +48,16 @@ class EditPost extends Component {
     if (hasChanged) {
       this.setState({
         loading: false,
+        bookToEdit: {
+          _id: single._id,
+          ...single,
+        },
       });
     }
   }
 
   componentWillUnmount() {
-    // this.props.dispatch(clearBook());
+    this.props.dispatch(clearBook());
   }
 
   componentDidMount() {
@@ -62,8 +66,8 @@ class EditPost extends Component {
   }
 
   render() {
-    const singleContent = this.props.books.single;
-
+      const singleContent = this.props.books.single;
+      console.log( this.state.editorContentHtml)
     return this.state.loading ? (
       <p>loading ..</p>
     ) : (
@@ -75,15 +79,10 @@ class EditPost extends Component {
           initialValues={this.state.bookToEdit}
           validationSchema={BookSchema}
           onSubmit={(values, { resetForm }) => {
-            // this.onPostBook({
-            //   ...values,
-            //   content: this.state.editorContentHtml,
-            // });
-            // this.setState({
-            //   editorState: EditorState.createEmpty(),
-            //   submitted: true,
-            // });
-            // resetForm({});
+            this.onEditBook({
+              ...values,
+              content: this.state.editorContentHtml,
+            });
           }}>
           {({
             values,
@@ -173,14 +172,14 @@ class EditPost extends Component {
               <button type='submit'>Edit book</button>
               <br />
 
-              {/* {this.state.success && this.props.books ? (
+              {this.state.success && this.props.books ? (
                 <div className='succes_entry'>
-                  <div>Congrats !!!</div>
-                  <Link to={`/article/${this.props.books.add.bookID}`}>
-                    See your book {this.props.books.add.bookID}
+                  <div>Update completed !!!</div>
+                  <Link to={`/article/${this.props.books.update.doc._id}`}>
+                    See your book {this.props.books.update.doc._id}
                   </Link>
                 </div>
-              ) : null} */}
+              ) : null}
             </form>
           )}
         </Formik>

@@ -38,6 +38,7 @@ class RichTextEditor extends Component {
   componentDidMount() {
     /// IN EDIT ROUTE LOAD BOOKID CONTENT IN TEXTEDITOR
     if (this.props.singleContent) {
+      console.log("createWithContent", this.props.singleContent)
       const singleContent = this.props.singleContent.content;
       const blockFromHtml = htmlToDraft(singleContent);
       const { contentBlocks, entityMap } = blockFromHtml;
@@ -48,17 +49,34 @@ class RichTextEditor extends Component {
 
       this.setState({
         editorState: EditorState.createWithContent(contentState),
-        editorContentHtml: "",
+      });
+    } else {
+      console.log("createEmpty", this.props.singleContent)
+
+      this.setState({
+        editorState: EditorState.createEmpty(),
       });
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.reset && this.state.editorContentHtml !== "") {
+  componentDidUpdate(prevProps) {
+    if (this.props.singleContent !== prevProps.singleContent) {
+      const editorContentHtml = stateToHTML(
+        this.state.editorState.getCurrentContent()
+      );
+      this.props.onEditorStateChange(editorContentHtml);
       this.setState({
-        editorState: EditorState.createEmpty(),
-        editorContentHtml: "",
+        editorState: this.props.singleContent,
+        editorContentHtml,
       });
+    }
+    if (!this.props.singleContent) {
+      if (this.props.reset !== prevProps.reset) {
+        this.setState({
+          editorState: EditorState.createEmpty(),
+          editorContentHtml: "",
+        });
+      }
     }
   }
 

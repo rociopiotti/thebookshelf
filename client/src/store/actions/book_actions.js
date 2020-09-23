@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BOOK_ADD, BOOK_CLEAR, BOOK_GET } from "../types";
+import { BOOK_ADD, BOOK_CLEAR, BOOK_GET, BOOK_UPDATE } from "../types";
 
 /*================ BOOKS =============*/
 export function addBook(book) {
@@ -31,6 +31,22 @@ export function getBook(bookID) {
 
   return {
     type: BOOK_GET,
+    payload: request,
+  };
+}
+
+export function editBook(book) {
+  const request = axios
+    .patch(`/api/books/book`, book)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return false;
+    });
+
+  return {
+    type: BOOK_UPDATE,
     payload: request,
   };
 }

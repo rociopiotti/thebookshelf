@@ -42,11 +42,6 @@ class AddPosts extends Component {
 
   render() {
     
-    // const singleContent = this.props.books.single;
-    // console.log(singleContent)
-    // if(singleContent) {
-    //   return null
-    // }
     return (
       <AdminLayout>
         <h4>Add a post</h4>
