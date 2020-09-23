@@ -6,71 +6,86 @@ import AdminLayout from "../../../../HOC/adminLayout";
 import { BookSchema, FormElement } from "./utils/postsHelper";
 
 // DRATF JS
-import { EditorState } from "draft-js";
+import { EditorState, ContentState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { connect } from "react-redux";
-import { addBook, clearBook } from "../../../../store/actions/book_actions";
+import {
+  addBook,
+  clearBook,
+  getBook,
+} from "../../../../store/actions/book_actions";
+import htmlToDraft from "html-to-draftjs";
 
-class AddPosts extends Component {
+class EditPost extends Component {
   state = {
-    editorState: EditorState.createEmpty(),
+    editorState: "",
     editorContentHtml: "",
     success: false,
+    loading: true,
+    bookToEdit: {},
   };
 
   onEditorStateChange = (value) => {
     this.setState({
+      editorState: value,
       editorContentHtml: value,
       submitted: false,
     });
   };
 
-  onPostBook = (values) => {
-    this.props.dispatch(addBook(values));
+  onEditBook = (values) => {
+    // this.props.dispatch(addBook(values));
   };
 
   componentDidUpdate(prevProps) {
-    const hasChanged = this.props.books !== prevProps.books;
-    if (hasChanged) {
+    const hasChanged = this.props.books.single !== prevProps.books.single;
+    const hasUpdated = this.props.books.update !== prevProps.books.update;
+    const single = this.props.books.single;
+
+    if (hasUpdated) {
       this.setState({ success: true });
     }
+
+    if (hasChanged) {
+      this.setState({
+        loading: false,
+      });
+    }
   }
+
   componentWillUnmount() {
-    this.props.dispatch(clearBook());
+    // this.props.dispatch(clearBook());
+  }
+
+  componentDidMount() {
+    /// FETCH BOOK
+    this.props.dispatch(getBook(this.props.match.params.id));
   }
 
   render() {
-    
-    // const singleContent = this.props.books.single;
-    // console.log(singleContent)
-    // if(singleContent) {
-    //   return null
-    // }
-    return (
+    const singleContent = this.props.books.single;
+
+    return this.state.loading ? (
+      <p>loading ..</p>
+    ) : (
       <AdminLayout>
-        <h4>Add a post</h4>
+        <h4>Edit post</h4>
 
         <Formik
-          initialValues={{
-            name: "",
-            author: "",
-            pages: "",
-            rating: "",
-            price: "",
-          }}
+          enableReinitialize={true}
+          initialValues={this.state.bookToEdit}
           validationSchema={BookSchema}
           onSubmit={(values, { resetForm }) => {
-            this.onPostBook({
-              ...values,
-              content: this.state.editorContentHtml,
-            });
-            this.setState({
-              editorState: EditorState.createEmpty(),
-              submitted: true,
-            });
-
-            resetForm({});
+            // this.onPostBook({
+            //   ...values,
+            //   content: this.state.editorContentHtml,
+            // });
+            // this.setState({
+            //   editorState: EditorState.createEmpty(),
+            //   submitted: true,
+            // });
+            // resetForm({});
           }}>
           {({
             values,
@@ -81,6 +96,7 @@ class AddPosts extends Component {
             handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
+              <input type='hidden' name='_id' value={values._id} />
               <FormElement
                 elData={{ element: "input", type: "text", value: values.name }}
                 placeholder='The title of the book'
@@ -94,6 +110,7 @@ class AddPosts extends Component {
               <RichTextEditor
                 onEditorStateChange={this.onEditorStateChange.bind(this)}
                 reset={this.state.submitted}
+                singleContent={singleContent}
               />
 
               <h4>Book info</h4>
@@ -155,17 +172,17 @@ class AddPosts extends Component {
                 touched={touched.price}
               />
 
-              <button type='submit'>Add book</button>
+              <button type='submit'>Edit book</button>
               <br />
 
-              {this.state.success && this.props.books ? (
+              {/* {this.state.success && this.props.books ? (
                 <div className='succes_entry'>
                   <div>Congrats !!!</div>
                   <Link to={`/article/${this.props.books.add.bookID}`}>
                     See your book {this.props.books.add.bookID}
                   </Link>
                 </div>
-              ) : null}
+              ) : null} */}
             </form>
           )}
         </Formik>
@@ -180,4 +197,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AddPosts);
+export default connect(mapStateToProps)(EditPost);

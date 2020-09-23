@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
-import { Editor, EditorState, RichUtils, getDefaultKeyBinding } from "draft-js";
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  getDefaultKeyBinding,
+  ContentState,
+} from "draft-js";
+import htmlToDraft from "html-to-draftjs";
 
 import "./RichTextEditor.css";
 import "../../../../../node_modules/draft-js/dist/Draft.css";
@@ -14,6 +21,20 @@ class RichTextEditor extends Component {
       editorState: EditorState.createEmpty(),
       editorContentHtml: "",
     };
+
+    if (props.singleContent) {
+      const singleContent = props.singleContent.content;
+      const blockFromHtml = htmlToDraft(singleContent);
+      const { contentBlocks, entityMap } = blockFromHtml;
+      const contentState = ContentState.createFromBlockArray(
+        contentBlocks,
+        entityMap
+      );
+      this.state = {
+        editorState: EditorState.createWithContent(contentState),
+        editorContentHtml: "",
+      };
+    }
 
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => {
@@ -36,6 +57,7 @@ class RichTextEditor extends Component {
       });
     }
   }
+
   _handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -101,7 +123,7 @@ class RichTextEditor extends Component {
             handleKeyCommand={this.handleKeyCommand}
             keyBindingFn={this.mapKeyToEditorCommand}
             onChange={this.onChange}
-            placeholder='Tell a story...'
+            placeholder='Write your review...'
             ref='editor'
             spellCheck={true}
           />

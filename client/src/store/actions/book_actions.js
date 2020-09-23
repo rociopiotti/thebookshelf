@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BOOK_ADD, BOOK_CLEAR } from "../types";
+import { BOOK_ADD, BOOK_CLEAR, BOOK_GET } from "../types";
 
 /*================ BOOKS =============*/
 export function addBook(book) {
@@ -16,5 +16,21 @@ export function clearBook(book) {
   return {
     type: BOOK_CLEAR,
     payload: null,
+  };
+}
+
+export function getBook(bookID) {
+  const request = axios
+    .get(`/api/books/book?id=${bookID}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return false;
+    });
+
+  return {
+    type: BOOK_GET,
+    payload: request,
   };
 }

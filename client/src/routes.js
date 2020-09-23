@@ -7,6 +7,7 @@ import Logout from "./components/Users/logout";
 // ADMIN
 import Admin from "./components/Users/Admin/admin";
 import AddPosts from "./components/Users/Admin/Posts/add";
+import EditPost from "./components/Users/Admin/Posts/edit";
 
 // HOC
 import MainLayout from "./HOC/mainLayout";
@@ -17,6 +18,9 @@ const Routes = () => {
     <BrowserRouter>
       <MainLayout>
         <Switch>
+          <Route
+            path='/admin/posts/edit/:id'
+            component={Auth(EditPost, true)}></Route>
           <Route
             path='/admin/posts/create'
             component={Auth(AddPosts, true)}></Route>
