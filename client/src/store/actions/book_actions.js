@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BOOK_ADD } from "../types";
+import { BOOK_ADD, BOOK_CLEAR } from "../types";
 
 /*================ BOOKS =============*/
 export function addBook(book) {
@@ -9,5 +9,12 @@ export function addBook(book) {
   return {
     type: BOOK_ADD,
     payload: request,
+  };
+}
+
+export function clearBook(book) {
+  return {
+    type: BOOK_CLEAR,
+    payload: null,
   };
 }

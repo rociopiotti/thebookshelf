@@ -10,7 +10,7 @@ import { EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { connect } from "react-redux";
-import { addBook } from "../../../../store/actions/book_actions";
+import { addBook, clearBook } from "../../../../store/actions/book_actions";
 
 class AddPosts extends Component {
   state = {
@@ -38,9 +38,11 @@ class AddPosts extends Component {
       this.setState({ success: true });
     }
   }
+  componentWillUnmount() {
+    this.props.dispatch(clearBook());
+  }
 
   render() {
-  
     return (
       <AdminLayout>
         <h4>Add a post</h4>
