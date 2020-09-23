@@ -46,13 +46,19 @@ class EditPost extends Component {
     }
 
     if (hasChanged) {
-      this.setState({
-        loading: false,
-        bookToEdit: {
-          _id: single._id,
-          ...single,
-        },
-      });
+      if (single !== false) {
+        this.setState({
+          loading: false,
+          bookToEdit: {
+            _id: single._id,
+            ...single,
+          },
+        });
+      } else {
+        {
+          this.props.history.push("/");
+        }
+      }
     }
   }
 
@@ -66,8 +72,8 @@ class EditPost extends Component {
   }
 
   render() {
-      const singleContent = this.props.books.single;
-      console.log( this.state.editorContentHtml)
+    const singleContent = this.props.books.single;
+    console.log(this.state.editorContentHtml);
     return this.state.loading ? (
       <p>loading ..</p>
     ) : (
