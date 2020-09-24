@@ -57,7 +57,7 @@ export function editBook(book) {
   };
 }
 
-export function getBooks(limit = 50, start = 0, order = "asc", list) {
+export function getBooks(limit = 50, start = 0, order = "desc", list) {
   const request = axios
     .get(`/api/books/allbooks?limit=${limit}&skip=${start}&order=${order}`)
     .then((response) => {

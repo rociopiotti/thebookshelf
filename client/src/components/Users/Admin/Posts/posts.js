@@ -15,14 +15,11 @@ const Posts = (props) => {
   let [posts, setPosts] = useState([]);
   useEffect(() => {
     axios
-      .get(`/api/books/allbooks?owner=${props.user.userData.id}&order=asc`)
+      .get(`/api/books/allbooks?owner=${props.user.userData.id}&order=desc`)
       .then((response) => {
         setPosts(response.data);
       });
   }, [props]);
-
-  console.log(props.user.userData.id);
-  console.log(posts);
 
   return (
     <AdminLayout>

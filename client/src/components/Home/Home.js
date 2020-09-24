@@ -4,8 +4,14 @@ import { getBooks } from "../../store/actions/book_actions";
 import { RowGenerator, GenerateRows } from "../../utils/helpers";
 
 class Home extends Component {
-  componentDidMount() {
-    this.props.dispatch(getBooks(6, 0, "desc"));
+  componentDidMount(props) {
+    let bookList = this.props.book.collection;
+
+    if (bookList) {
+      return null;
+    } else {
+      this.props.dispatch(getBooks(6, 0, "desc"));
+    }
   }
 
   loadmore = () => {
@@ -29,7 +35,9 @@ class Home extends Component {
         <div className='row articles_container'>
           {this.showArticles(this.props.book)}
         </div>
-        <button className='loadmore' onClick={this.loadmore}>Load more</button>
+        <button className='loadmore' onClick={this.loadmore}>
+          Load more
+        </button>
       </div>
     ) : null;
   }
