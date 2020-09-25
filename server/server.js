@@ -8,7 +8,6 @@ const app = express();
 const user = require("./routes/user");
 const books = require("./routes/book");
 
-
 mongoose.connect(config.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -28,3 +27,4 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
+
