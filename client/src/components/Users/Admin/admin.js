@@ -1,19 +1,12 @@
-import React, { useEffect } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-
+import React from "react";
+import { useSelector } from "react-redux";
 import { RouteLinks } from "../../../utils/routeLinks";
-
 import { Link } from "react-router-dom";
-
 import Fontawesome from "react-fontawesome";
+import AdminLayout from "../../../HOC/adminLayout";
+
 const Admin = (props) => {
   const userData = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(userData.userData);
-  }, [dispatch, props]);
 
   const element = (item, i) => (
     <div key={i} className='dashboardItem'>
@@ -35,7 +28,7 @@ const Admin = (props) => {
 
   const showIntro = () => {
     if (userData) {
-      const { name, lastname, email } = userData.userData;
+      const { name } = userData.userData;
       return (
         <div className='row'>
           <div className='twelve columns'>
@@ -55,14 +48,16 @@ const Admin = (props) => {
     }
   };
   return (
-    <div className='container admin_layout'>
-      {showIntro()}
-      <div>
-        {userData === false ? (
-          <div className='row articles_container'>SORRY, NO USER FOUND</div>
-        ) : null}
+    <AdminLayout>
+      <div className='container admin_layout'>
+        {showIntro()}
+        <div>
+          {userData === false ? (
+            <div className='row articles_container'>SORRY, NO USER FOUND</div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 

@@ -16,6 +16,7 @@ const Article = (props) => {
   const showArticle = () => {
     if (article.single) {
       const { name, author, rating, content, ownerId } = article.single;
+      // console.log( "content", content)
       return (
         <div className=' single_article_container'>
           <div className='top'>

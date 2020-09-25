@@ -25,11 +25,11 @@ const Routes = () => {
           />
           <Route path='/admin/posts/create' component={Auth(AddPosts, true)} />
           <Route path='/admin/posts' component={Auth(AdminPosts, true)} />
-          <Route path='/article/:id' component={Article} />
+          <Route path='/article/:id' component={Auth(Article)} />
           <Route path='/admin' component={Auth(Admin, true)} />
           <Route path='/logout' component={Auth(Logout, true)} />
           <Route path='/login' component={Auth(Login, false)} />
-          <Route path='/' component={Home} />
+          <Route path='/' component={Auth(Home)} />
         </Switch>
       </MainLayout>
     </BrowserRouter>

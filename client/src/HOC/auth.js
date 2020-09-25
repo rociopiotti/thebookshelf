@@ -18,7 +18,7 @@ export default function (ComposedClass, reload) {
           }
         } else {
           if (!reload) {
-            this.props.history.push("/admin");
+            // this.props.history.push("/admin");
           }
         }
       });

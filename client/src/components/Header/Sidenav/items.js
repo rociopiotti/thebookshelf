@@ -33,7 +33,7 @@ const Items = (props) => {
       {showLinks()}
       {props.user.auth ? (
         <div>
-          <div className='nav_split'> Admin options</div>
+          <div className='nav_split'>Admin options</div>
           {showAdminLinks()}
         </div>
       ) : null}

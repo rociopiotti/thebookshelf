@@ -10,7 +10,6 @@ import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { connect } from "react-redux";
 import {
-  addBook,
   clearBook,
   editBook,
   getBook,
@@ -26,6 +25,7 @@ class EditPost extends Component {
   };
 
   onEditorStateChange = (value) => {
+    console.log(this.state);
     this.setState({
       editorState: value,
       editorContentHtml: value,
@@ -41,25 +41,45 @@ class EditPost extends Component {
     const hasChanged = this.props.books.single !== prevProps.books.single;
     const hasUpdated = this.props.books.update !== prevProps.books.update;
     const single = this.props.books.single;
+
     if (hasUpdated) {
-      this.setState({ success: true });
+      this.setState({
+        success: true,
+        editorState: this.state.editorContentHtml,
+      });
     }
 
     if (hasChanged) {
       if (single !== false) {
         this.setState({
           loading: false,
+          editorState: this.state.editorContentHtml,
           bookToEdit: {
             _id: single._id,
-            ...single,
+            name: single.name,
+            author: single.author,
+            pages: single.pages,
+            rating: single.rating,
+            price: single.price,
           },
         });
       } else {
-        {
-          this.props.history.push("/");
-        }
+        this.props.history.push("/");
       }
     }
+
+    //----------------------------------------------------
+    // TODO: Pendiente de refactor.
+    if (
+      this.props.books.single &&
+      this.state.editorState === ""
+    ) {
+      this.setState({
+        editorState: this.props.books.single.content,
+        editorContentHtml: this.props.books.single.content,
+      });
+    }
+    //----------------------------------------------------
   }
 
   componentWillUnmount() {
@@ -73,7 +93,7 @@ class EditPost extends Component {
 
   render() {
     const singleContent = this.props.books.single;
-    console.log(this.state.editorContentHtml);
+
     return this.state.loading ? (
       <p>loading ..</p>
     ) : (
@@ -81,10 +101,14 @@ class EditPost extends Component {
         <h4>Edit post</h4>
 
         <Formik
-          enableReinitialize={true}
           initialValues={this.state.bookToEdit}
           validationSchema={BookSchema}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={(values) => {
+            // console.clear();
+            // console.log(this.state);
+            // console.log(values);
+            // console.log(this.state.editorContentHtml);
+
             this.onEditBook({
               ...values,
               content: this.state.editorContentHtml,
@@ -113,7 +137,7 @@ class EditPost extends Component {
               <RichTextEditor
                 onEditorStateChange={this.onEditorStateChange.bind(this)}
                 reset={this.state.submitted}
-                singleContent={singleContent}
+                singleContent={singleContent} // this.props.books.single.content
               />
 
               <h4>Book info</h4>

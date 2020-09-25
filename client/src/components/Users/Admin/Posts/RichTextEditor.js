@@ -23,6 +23,7 @@ class RichTextEditor extends Component {
     };
 
     this.focus = () => this.refs.editor.focus();
+
     this.onChange = (editorState) => {
       const editorContentHtml = stateToHTML(editorState.getCurrentContent());
       props.onEditorStateChange(editorContentHtml);
@@ -35,10 +36,18 @@ class RichTextEditor extends Component {
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
   }
 
+  onChangeEditor() {
+    const editorContentHtml = stateToHTML(
+      this.state.editorState.getCurrentContent()
+    );
+    this.setState({ editorContentHtml });
+    this.props.onEditorStateChange(editorContentHtml);
+  }
+
   componentDidMount() {
     /// IN EDIT ROUTE LOAD BOOKID CONTENT IN TEXTEDITOR
     if (this.props.singleContent) {
-      console.log("createWithContent", this.props.singleContent)
+
       const singleContent = this.props.singleContent.content;
       const blockFromHtml = htmlToDraft(singleContent);
       const { contentBlocks, entityMap } = blockFromHtml;
@@ -51,8 +60,6 @@ class RichTextEditor extends Component {
         editorState: EditorState.createWithContent(contentState),
       });
     } else {
-      console.log("createEmpty", this.props.singleContent)
-
       this.setState({
         editorState: EditorState.createEmpty(),
       });
@@ -60,11 +67,15 @@ class RichTextEditor extends Component {
   }
 
   componentDidUpdate(prevProps) {
+
     if (this.props.singleContent !== prevProps.singleContent) {
+
       const editorContentHtml = stateToHTML(
         this.state.editorState.getCurrentContent()
       );
+
       this.props.onEditorStateChange(editorContentHtml);
+
       this.setState({
         editorState: this.props.singleContent,
         editorContentHtml,
@@ -120,6 +131,8 @@ class RichTextEditor extends Component {
     // either style the placeholder or hide it. Let's just hide it now.
     let className = "RichEditor-editor";
     var contentState = editorState.getCurrentContent();
+    this.onChangeEditor.bind(this);
+    
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== "unstyled") {
         className += " RichEditor-hidePlaceholder";
