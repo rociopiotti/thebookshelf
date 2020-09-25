@@ -12,7 +12,7 @@ const config = {
     DATABASE: process.env.MONGODB_URI,
   },
   default: {
-    SECRET: "SUPERSECRETPASSWORD879",
+    SECRET: SECRET,
     DATABASE: "mongodb://localhost:27017/bookshelf",
   },
 };
