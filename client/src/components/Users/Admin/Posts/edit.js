@@ -41,6 +41,8 @@ class EditPost extends Component {
     const hasChanged = this.props.books.single !== prevProps.books.single;
     const hasUpdated = this.props.books.update !== prevProps.books.update;
     const single = this.props.books.single;
+    const content = this.props.books.single.content;
+    const editorState = this.state.editorState;
 
     if (hasUpdated) {
       this.setState({
@@ -71,12 +73,12 @@ class EditPost extends Component {
     //----------------------------------------------------
     // TODO: Pendiente de refactor.
     if (
-      this.props.books.single &&
-      this.state.editorState === ""
+      single &&
+      editorState === ""
     ) {
       this.setState({
-        editorState: this.props.books.single.content,
-        editorContentHtml: this.props.books.single.content,
+        editorState: content,
+        editorContentHtml: content,
       });
     }
     //----------------------------------------------------
