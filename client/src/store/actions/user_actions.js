@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_LOGIN, USER_AUTH, USER_LOGOUT } from "../types";
+import { USER_LOGIN, USER_AUTH, USER_LOGOUT} from "../types";
 
 /*================ USER =============*/
 export function loginUser({ email, password }) {
@@ -31,3 +31,5 @@ export function logoutUser() {
     payload: request,
   };
 }
+
+

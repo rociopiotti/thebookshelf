@@ -9,29 +9,40 @@ export const RouteLinks = {
       icon: "sign-in",
       text: "Log-in",
       link: "/login",
-      restricted: true
+      restricted: true,
     },
   ],
   admin: [
     {
-      icon: "sign-out",
-      text: "Log-out",
-      link: "/logout",
-    },
-    {
       icon: "home",
       text: "Admin",
       link: "/admin",
-    },
-    {
-      icon: "clipboard",
-      text: "My post",
-      link: "/admin/posts",
+      dashboard: false,
+
     },
     {
       icon: "plus",
       text: "Add post",
       link: "/admin/posts/create",
+      dashboard: true,
+    },
+    {
+      icon: "clipboard",
+      text: "My post",
+      link: "/admin/posts",
+      dashboard: true,
+    },
+    {
+      icon: "cog",
+      text: "Account settings",
+      link: "/admin/account/settings",
+      dashboard: true,
+    },
+    {
+      icon: "sign-out",
+      text: "Log-out",
+      link: "/logout",
+      dashboard: false,
     },
   ],
 };
