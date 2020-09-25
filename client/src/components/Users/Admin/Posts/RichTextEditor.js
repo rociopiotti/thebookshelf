@@ -48,6 +48,7 @@ class RichTextEditor extends Component {
     /// IN EDIT ROUTE LOAD BOOKID CONTENT IN TEXTEDITOR
     if (this.props.singleContent) {
 
+      console.log(this.props.singleContent.content)
       const singleContent = this.props.singleContent.content;
       const blockFromHtml = htmlToDraft(singleContent);
       const { contentBlocks, entityMap } = blockFromHtml;
