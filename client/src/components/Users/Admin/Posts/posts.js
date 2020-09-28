@@ -10,6 +10,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+//----------------------------------------------------
+// TODO: Permitir ordenar la tabla por título, author, Fecha de creacion, y rating
+// Implementar paleta de color
+//----------------------------------------------------
 
 const Posts = (props) => {
   let [posts, setPosts] = useState([]);
