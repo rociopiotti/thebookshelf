@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Fontawesome from "react-fontawesome";
 
 export const RatingStars = (rating, starClass) => {
-  // const { rating } = article;
   const defaultRating = ["grey", "grey", "grey", "grey", "grey"];
 
   const stars = defaultRating.fill("#AC3B61", 0, rating);
@@ -44,7 +43,7 @@ export const GenerateRows = (rows, type) =>
               <span>{RatingStars(article.rating, "home_star")}</span>
             </div>
             <div>
-              <span>Price: {article.price}</span>
+              <span>EUR {article.price}</span>
             </div>
           </Link>
         </div>
