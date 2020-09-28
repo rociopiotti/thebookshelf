@@ -1,6 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import Fontawesome from "react-fontawesome";
+
+export const RatingStars = (rating, starClass) => {
+  // const { rating } = article;
+  const defaultRating = ["grey", "grey", "grey", "grey", "grey"];
+
+  const stars = defaultRating.fill("#AC3B61", 0, rating);
+
+  const starIcon = stars.map((item, index) => (
+    <Fontawesome
+      key={index}
+      name='star'
+      style={{ color: item }}
+      alt={rating}
+      className={`${starClass} star_icon`}
+    />
+  ));
+
+  return starIcon;
+};
+
 export const RowGenerator = (list, cols) => {
   const rows = [...Array(Math.ceil(list.length / cols))];
   const articlesRows = rows.map((row, i) =>
@@ -20,7 +41,7 @@ export const GenerateRows = (rows, type) =>
               <span>Author: {article.author}</span>
             </div>
             <div>
-              <span>Rating: {article.rating}</span>
+              <span>{RatingStars(article.rating, "home_star")}</span>
             </div>
             <div>
               <span>Price: {article.price}</span>

@@ -152,6 +152,11 @@ nav .nav_split {
 
 .star_icon {
   margin: 0.5vw 0.5vh;
+}
+.home_star {
+  padding-top: 0vh;
+}
+.article_star_icon {
   padding-top: 2.5vh;
 }
 

@@ -29,6 +29,7 @@ class Home extends Component {
       return false;
     }
   };
+
   render() {
     return this.props.book ? (
       <div className='container'>
