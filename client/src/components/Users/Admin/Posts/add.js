@@ -41,7 +41,6 @@ class AddPosts extends Component {
   }
 
   render() {
-    
     return (
       <AdminLayout>
         <h4>Add a post</h4>
@@ -157,7 +156,7 @@ class AddPosts extends Component {
                 <div className='succes_entry'>
                   <div>Congrats !!!</div>
                   <Link to={`/article/${this.props.books.add.bookID}`}>
-                    See your book {this.props.books.add.bookID}
+                    See your book
                   </Link>
                 </div>
               ) : null}

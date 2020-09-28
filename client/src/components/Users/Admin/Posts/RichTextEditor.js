@@ -23,12 +23,14 @@ class RichTextEditor extends Component {
     };
 
     this.focus = () => this.refs.editor.focus();
-
+    //----------------------------------------------------
+    // TODO: Pendiente de refactor.
     this.onChange = (editorState) => {
       const editorContentHtml = stateToHTML(editorState.getCurrentContent());
       props.onEditorStateChange(editorContentHtml);
       this.setState({ editorState, editorContentHtml });
     };
+    //----------------------------------------------------
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
@@ -47,8 +49,7 @@ class RichTextEditor extends Component {
   componentDidMount() {
     /// IN EDIT ROUTE LOAD BOOKID CONTENT IN TEXTEDITOR
     if (this.props.singleContent) {
-
-      console.log(this.props.singleContent.content)
+      console.log(this.props.singleContent.content);
       const singleContent = this.props.singleContent.content;
       const blockFromHtml = htmlToDraft(singleContent);
       const { contentBlocks, entityMap } = blockFromHtml;
@@ -68,9 +69,7 @@ class RichTextEditor extends Component {
   }
 
   componentDidUpdate(prevProps) {
-
     if (this.props.singleContent !== prevProps.singleContent) {
-
       const editorContentHtml = stateToHTML(
         this.state.editorState.getCurrentContent()
       );
@@ -133,7 +132,7 @@ class RichTextEditor extends Component {
     let className = "RichEditor-editor";
     var contentState = editorState.getCurrentContent();
     this.onChangeEditor.bind(this);
-    
+
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== "unstyled") {
         className += " RichEditor-hidePlaceholder";

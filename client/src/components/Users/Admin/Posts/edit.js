@@ -72,10 +72,7 @@ class EditPost extends Component {
 
     //----------------------------------------------------
     // TODO: Pendiente de refactor.
-    if (
-      single &&
-      editorState === ""
-    ) {
+    if (single && editorState === "") {
       this.setState({
         editorState: content,
         editorContentHtml: content,
@@ -106,11 +103,6 @@ class EditPost extends Component {
           initialValues={this.state.bookToEdit}
           validationSchema={BookSchema}
           onSubmit={(values) => {
-            // console.clear();
-            // console.log(this.state);
-            // console.log(values);
-            // console.log(this.state.editorContentHtml);
-
             this.onEditBook({
               ...values,
               content: this.state.editorContentHtml,
@@ -139,7 +131,10 @@ class EditPost extends Component {
               <RichTextEditor
                 onEditorStateChange={this.onEditorStateChange.bind(this)}
                 reset={this.state.submitted}
+                //----------------------------------------------------
+                // TODO: Pendiente de refactor.
                 singleContent={singleContent} // this.props.books.single.content
+                //----------------------------------------------------
               />
 
               <h4>Book info</h4>
@@ -208,7 +203,7 @@ class EditPost extends Component {
                 <div className='succes_entry'>
                   <div>Update completed !!!</div>
                   <Link to={`/article/${this.props.books.update.doc._id}`}>
-                    See your book {this.props.books.update.doc._id}
+                    See your book
                   </Link>
                 </div>
               ) : null}

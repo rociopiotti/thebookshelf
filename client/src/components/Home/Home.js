@@ -16,7 +16,7 @@ class Home extends Component {
 
   loadmore = () => {
     let bookList = this.props.book.collection;
-    let count = bookList.legth;
+    let count = bookList.length;
     this.props.dispatch(getBooks(2, count, "desc", bookList));
   };
 
