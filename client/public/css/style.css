@@ -218,14 +218,24 @@ nav .nav_split {
   text-align: center;
   width: 50%;
   background-color: #eee2dc;
-  border: 2px solid #777475;
+  border: none;
   border-radius: 0.5vw;
   color: #777475;
   font-size: 16px;
   padding: 5vh 5vw;
   margin: 30vh auto;
+  outline: 'none'
 }
-
+.succes_entry:focus{
+  border: none;
+  outline: 'none'
+  
+} 
+.succes_entry:active{
+  border: none;
+  outline: 'none'
+  
+} 
 .succes_entry a {
   color: #123c69;
 }
@@ -606,7 +616,7 @@ textarea {
   }
   .succes_entry {
     text-align: center;
-    width: 400;
+    width: 20vw;
     background-color: #eee2dc;
     border: 2px solid #777475;
     border-radius: 0.5vw;
