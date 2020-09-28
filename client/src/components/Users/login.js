@@ -4,8 +4,6 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../../store/actions/user_actions";
 
-const pass = process.env.REACT_APP_PASSWORD;
-
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, "Too short")
@@ -31,7 +29,7 @@ class Login extends Component {
         success: auth ? true : false,
       };
     }
-    return null
+    return null;
   }
 
   componentDidUpdate() {
@@ -39,8 +37,9 @@ class Login extends Component {
       this.props.history.push("/admin");
     }
   }
-  
+
   render() {
+
     return (
       <div className='container form_container'>
         <h1>Welcome back</h1>
@@ -49,7 +48,7 @@ class Login extends Component {
         <Formik
           initialValues={{
             email: "francis@gmail.com",
-            password: `${pass}`,
+            password: "Password123!",
           }}
           validationSchema={LoginSchema}
           onSubmit={(values) => {
