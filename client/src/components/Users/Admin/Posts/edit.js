@@ -5,6 +5,8 @@ import AdminLayout from "../../../../HOC/adminLayout";
 
 import { BookSchema, FormElement } from "./utils/postsHelper";
 
+import Modal from "@material-ui/core/Modal";
+
 // DRATF JS
 import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
@@ -22,10 +24,10 @@ class EditPost extends Component {
     success: false,
     loading: true,
     bookToEdit: {},
+    open: false,
   };
 
   onEditorStateChange = (value) => {
-    console.log(this.state);
     this.setState({
       editorState: value,
       editorContentHtml: value,
@@ -90,6 +92,18 @@ class EditPost extends Component {
     this.props.dispatch(getBook(this.props.match.params.id));
   }
 
+  // MODAL
+  handleOpen() {
+    this.setState({
+      open: true,
+    });
+  }
+  handleClose() {
+    this.setState({
+      open: false,
+    });
+  }
+
   render() {
     const singleContent = this.props.books.single;
 
@@ -106,6 +120,9 @@ class EditPost extends Component {
             this.onEditBook({
               ...values,
               content: this.state.editorContentHtml,
+            });
+            this.setState({
+              open: true,
             });
           }}>
           {({
@@ -200,12 +217,18 @@ class EditPost extends Component {
               <br />
 
               {this.state.success && this.props.books ? (
-                <div className='succes_entry'>
-                  <div>Update completed !!!</div>
-                  <Link to={`/article/${this.props.books.update.doc._id}`}>
-                    See your book
-                  </Link>
-                </div>
+                <Modal
+                  open={this.state.open}
+                  onClose={this.handleClose.bind(this)}
+                  aria-labelledby='simple-modal-title'
+                  aria-describedby='simple-modal-description'>
+                  <div className='succes_entry' classes={{}}>
+                    <div>Update completed</div>
+                    <Link to={`/article/${this.props.books.update.doc._id}`}>
+                      See your book
+                    </Link>
+                  </div>
+                </Modal>
               ) : null}
             </form>
           )}
@@ -214,7 +237,6 @@ class EditPost extends Component {
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
     books: state.books,

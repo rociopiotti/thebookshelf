@@ -18,12 +18,11 @@ const Article = (props) => {
     const { rating } = article.single;
     const defaultRating = ["grey", "grey", "grey", "grey", "grey"];
 
-    const yellowStars = defaultRating.length;
 
-    const stars = defaultRating.fill("yellow", 0, rating);
+    const stars = defaultRating.fill("#AC3B61", 0, rating);
 
     const starIcon = stars.map((item, index) => (
-      <Fontawesome key={index} name='star' style={{ color: item }} alt={rating}/>
+      <Fontawesome key={index} name='star' style={{ color: item }} alt={rating} className="star_icon"/>
     ));
 
     return starIcon;
@@ -31,7 +30,7 @@ const Article = (props) => {
 
   const showArticle = () => {
     if (article.single) {
-      const { name, author, rating, content, ownerId } = article.single;
+      const { name, author,  content, ownerId } = article.single;
       return (
         <div className=' single_article_container'>
           <div className='top'>

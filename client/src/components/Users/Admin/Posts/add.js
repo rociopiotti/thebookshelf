@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import AdminLayout from "../../../../HOC/adminLayout";
-
 import { BookSchema, FormElement } from "./utils/postsHelper";
 
+import Modal from "@material-ui/core/Modal";
 // DRATF JS
 import { EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { connect } from "react-redux";
 import { addBook, clearBook } from "../../../../store/actions/book_actions";
+
 //----------------------------------------------------
 // TODO: Agregar imagenes a libros
 //----------------------------------------------------
@@ -20,6 +21,7 @@ class AddPosts extends Component {
     editorState: EditorState.createEmpty(),
     editorContentHtml: "",
     success: false,
+    open: false,
   };
 
   onEditorStateChange = (value) => {
@@ -43,6 +45,19 @@ class AddPosts extends Component {
     this.props.dispatch(clearBook());
   }
 
+  // MODAL
+  handleOpen() {
+    this.setState({
+      open: true,
+    });
+  }
+
+  handleClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
   render() {
     return (
       <AdminLayout>
@@ -65,6 +80,7 @@ class AddPosts extends Component {
             this.setState({
               editorState: EditorState.createEmpty(),
               submitted: true,
+              open: true,
             });
 
             resetForm({});
@@ -156,12 +172,18 @@ class AddPosts extends Component {
               <br />
 
               {this.state.success && this.props.books ? (
-                <div className='succes_entry'>
-                  <div>Congrats !!!</div>
-                  <Link to={`/article/${this.props.books.add.bookID}`}>
-                    See your book
-                  </Link>
-                </div>
+                <Modal
+                  open={this.state.open}
+                  onClose={this.handleClose.bind(this)}
+                  aria-labelledby='simple-modal-title'
+                  aria-describedby='simple-modal-description'>
+                  <div className='succes_entry' classes={{}}>
+                    <div>Congrats !!!</div>
+                    <Link to={`/article/${this.props.books.add.bookID}`}>
+                      See your book
+                    </Link>
+                  </div>
+                </Modal>
               ) : null}
             </form>
           )}
