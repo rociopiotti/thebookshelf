@@ -9,7 +9,8 @@ const DATABASE = process.env.REACT_APP_CLIENT_DATABASE
 const config = {
   production: {
     SECRET: process.env.SECRET,
-    DATABASE: process.env.MONGODB_URI,
+    DATABASE: process.env.MONDODB_URI,
+
   },
   default: {
     SECRET: SECRET,
