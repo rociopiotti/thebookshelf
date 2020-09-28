@@ -9,6 +9,7 @@ a {
   text-decoration: none;
   color: black;
 }
+
 a:active,
 a:visited,
 a:focus {
@@ -152,12 +153,12 @@ nav .nav_split {
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
-  /* padding: 20px; */
   font-weight: 500;
   cursor: pointer;
-  width: 15vw;
+  width: 30vw;
   margin: 0 auto;
 }
+
 .loadmore:focus {
   border: none;
 }
@@ -567,5 +568,10 @@ textarea {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+@media screen and (min-width: 768px) {
+  .loadmore {
+    width: 15vw;
   }
 }

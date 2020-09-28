@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBook, clearBook } from "../../store/actions/book_actions";
 
+import Fontawesome from "react-fontawesome";
 const Article = (props) => {
   const article = useSelector((state) => state.books);
   const dispatch = useDispatch();
@@ -13,10 +14,24 @@ const Article = (props) => {
     };
   }, [dispatch, props]);
 
+  const ratingStars = () => {
+    const { rating } = article.single;
+    const defaultRating = ["grey", "grey", "grey", "grey", "grey"];
+
+    const yellowStars = defaultRating.length;
+
+    const stars = defaultRating.fill("yellow", 0, rating);
+
+    const starIcon = stars.map((item, index) => (
+      <Fontawesome key={index} name='star' style={{ color: item }} alt={rating}/>
+    ));
+
+    return starIcon;
+  };
+
   const showArticle = () => {
     if (article.single) {
       const { name, author, rating, content, ownerId } = article.single;
-      // console.log( "content", content)
       return (
         <div className=' single_article_container'>
           <div className='top'>
@@ -25,10 +40,7 @@ const Article = (props) => {
               <span>Author: </span>
               {author}
             </div>
-            <div>
-              <span>Rating: </span>
-              {rating}
-            </div>
+            <div alt="Rating">{ratingStars()}</div>
             <div className='content'>
               <div
                 className='article_content'
