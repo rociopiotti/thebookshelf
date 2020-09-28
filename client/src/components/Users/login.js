@@ -49,7 +49,7 @@ class Login extends Component {
         <Formik
           initialValues={{
             email: "francis@gmail.com",
-            password: pass,
+            password: `${pass}`,
           }}
           validationSchema={LoginSchema}
           onSubmit={(values) => {
