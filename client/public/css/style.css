@@ -98,7 +98,7 @@ nav .nav_split {
   border-radius: 3px;
   font-size: 11px;
   margin-right: 5px;
-  color: #fff;
+  color: #EEE2DC;
 }
 
 .book_item .book_bubble.rating {
@@ -116,7 +116,7 @@ nav .nav_split {
 }
 
 .book_item .book_items strong {
-  color: #ffffff;
+  color: #EEE2DC;
 }
 .book_item .book_items div {
   margin-bottom: 8px;
@@ -309,7 +309,7 @@ th:first-child {
   font-size: 20px;
   padding: 10px 52px;
   background: #e91e63;
-  color: #fff;
+  color: #EEE2DC;
   font-weight: 300;
   border-radius: 3px;
   border: none;
@@ -345,7 +345,7 @@ th:first-child {
 
 .edit_confirm {
   background: #123C69;
-  color: #fff;
+  color: #EEE2DC;
   padding: 10px 0px;
 }
 table {
@@ -454,7 +454,7 @@ tr:nth-child(even) {
   flex-grow: 1;
   height: 106px;
   background: #3c3c3c;
-  color: #fff;
+  color: #EEE2DC;
   font-weight: 700;
   padding: 21px 15px;
   box-sizing: border-box;
@@ -483,7 +483,7 @@ tr:nth-child(even) {
   border-radius: 50%;
 }
 .loader {
-  color: #ebebeb;
+  color: #EDC7B7;
   font-size: 11px;
   text-indent: -99999em;
   margin: 55px auto;
@@ -503,7 +503,7 @@ tr:nth-child(even) {
 .loader:before {
   width: 5.2em;
   height: 10.2em;
-  background: #ffffff;
+  background: #EEE2DC;
   border-radius: 10.2em 0 0 10.2em;
   top: -0.1em;
   left: -0.1em;
@@ -515,7 +515,7 @@ tr:nth-child(even) {
 .loader:after {
   width: 5.2em;
   height: 10.2em;
-  background: #ffffff;
+  background: #EEE2DC;
   border-radius: 0 10.2em 10.2em 0;
   top: -0.1em;
   left: 5.1em;

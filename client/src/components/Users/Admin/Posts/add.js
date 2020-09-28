@@ -11,6 +11,9 @@ import "draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { connect } from "react-redux";
 import { addBook, clearBook } from "../../../../store/actions/book_actions";
+//----------------------------------------------------
+// TODO: Agregar imagenes a libros
+//----------------------------------------------------
 
 class AddPosts extends Component {
   state = {
