@@ -27,6 +27,7 @@ const Header = () => {
         />
       </div>
       <MainNav showNav={mainNav} onHideNav={() => onHideNav(false)} />
+      
       <Link to='/' className='logo'>
         The Bookshelf
       </Link>
