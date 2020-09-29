@@ -11,7 +11,7 @@ Desarrollo full stack de sitio web.
 
   
 
-Para ver el demo [click aquí]()
+Para ver el demo [click aquí](https://bookshelfproject.herokuapp.com/)
 
   
 
