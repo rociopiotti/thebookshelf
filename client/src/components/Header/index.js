@@ -29,7 +29,7 @@ const Header = () => {
       <MainNav showNav={mainNav} onHideNav={() => onHideNav(false)} />
       
       <Link to='/' className='logo'>
-        The Bookshelf
+        The bookshelf
       </Link>
     </header>
   );
