@@ -28,7 +28,7 @@ const Routes = () => {
           <meta charSet='utf-8' />
           <meta name='description' content='The bookshelf is a final project from the course The complete React fullstack course (2nd Edition).' />
           <meta property="og:url" content="https://bookshelfproject.herokuapp.com/" />
-          <meta property="og:image" content="./OPimage.png" />
+          <meta property="og:image" content="%PUBLIC_URL%/OPimage.png" />
         </Helmet>
         <Switch>
           <Route
