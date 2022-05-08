@@ -17,14 +17,7 @@ Use cases:
 ## Demo 
 
 To se the demo: [click here](https://bookshelfproject.herokuapp.com/)
-
-  
-
-### Developed by  
-
-: Rocío Piotti 
-  
-  
+ 
 
 ## Work done
 - Developed in ReactJs.
@@ -69,3 +62,6 @@ To se the demo: [click here](https://bookshelfproject.herokuapp.com/)
  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) 
  - [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension)
  
+ ### Developed by  
+
+: Rocío Piotti 
