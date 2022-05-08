@@ -16,7 +16,7 @@ Use cases:
   
 ## Demo 
 
-To se the demo: [click aquí](https://bookshelfproject.herokuapp.com/)
+To se the demo: [click here](https://bookshelfproject.herokuapp.com/)
 
   
 
@@ -26,8 +26,7 @@ To se the demo: [click aquí](https://bookshelfproject.herokuapp.com/)
   
   
 
-## Trabajos realizados
-
+## Work done
 - Developed in ReactJs.
 - Server creation with express.
 - Layout with JSX.
